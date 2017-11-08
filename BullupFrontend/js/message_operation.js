@@ -182,3 +182,12 @@ $(".message_reject_btn").on('click', function(e){
         }
     }
 });
+//新添加，点击删除可以删除消息系统中所有的消息
+$("#message_center_btn").on('click',function(e){
+    var messageDelBtnId = $(this).attr('id');
+    var messageDelBtnIdString = String(messageDelBtnId);
+    messageDelBtnIdString = messageDelBtnIdString.substring(messageDelBtnIdString.indexOf('_') + 1);
+    var messageIndexString = messageDelBtnIdString.substring(0,messageDelBtnIdString.indexOf('_'));
+    var message = messageInfo[Number.parseInt(messageIndexString)];
+    messageInfo.splice(Number.parseInt(messageIndexString), 1);
+        })  

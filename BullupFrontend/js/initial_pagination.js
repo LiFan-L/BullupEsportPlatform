@@ -45,11 +45,16 @@ function page(formedTeams,curPage){
 			if (formedTeams[team].mapSelection == roomInfo.mapSelection) {
 				if (formedTeams[team].teamParticipantsNum == roomInfo.teamParticipantsNum) {
 					if (formedTeams[team].rewardAmount == roomInfo.rewardAmount) {
-						var battleInfo = {};
-						battleInfo.hostTeamName = $('#team_details_team_name').html();
-						battleInfo.challengerTeamName = teamInfo.roomName;
-						battleInfo.userId = userInfo.userId;
-						socket.emit('battleInvite', battleInfo);
+						if (formedTeams[team].captain.name != roomInfo.captain.name) {
+                                var battleInfo = {};
+                                battleInfo.hostTeamName = $('#team_details_team_name').html();
+                                battleInfo.challengerTeamName = teamInfo.roomName;
+                                battleInfo.userId = userInfo.userId;
+                                socket.emit('battleInvite', battleInfo);
+                            }else{
+                                $("#invite-battle-btn").attr('href', 'javascript:void(0)');
+                                alert("您不能邀请您自己的队伍");
+                            }
 					} else {
 						$("#invite-battle-btn").attr('href', 'javascript:void(0)');
 						alert("您选择的队伍积分不符合");
